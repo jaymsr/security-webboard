@@ -1,0 +1,39 @@
+.Login-Page {
+    text-align: center;
+    background-image: url(https://i.ytimg.com/vi/c7oV1T2j5mc/maxresdefault.jpg);
+    background-repeat: repeat;
+    height: 100vh;
+  }
+  
+  .Field-Container {
+    font-family: "Baloo Chettan", cursive;
+    padding: 25px;
+    width: 600px;
+    height: 40vh;
+    /* box-shadow: 3px 3px 3px rgb(59, 59, 59);
+    background:linear-gradient(rgba(246, 255, 163, 0.856), transparent);
+    background-color: #ffffff; */
+    margin-top: 30vh;
+    display: inline-block;
+    text-align: center;
+  }
+  
+  .enterText {
+    font-family: "Gill Sans", sans-serif;
+    margin-top: 30px;
+  }
+  
+  .blankAlert {
+    font-family: "Gill Sans", sans-serif;
+    text-align: left;
+    color: red;
+    margin-top: 1vh;
+  }
+
+  .enterSubmit {
+    font-family: "Gill Sans", sans-serif;
+    text-align: left;
+    color: rgb(12, 136, 54);
+    margin-top: 1vh;
+  }
+  
