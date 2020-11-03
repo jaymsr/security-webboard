@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Comments from './Comments';
 import '../css/Post.css';
+import CommentField from './CommentField';
 
 class Post extends Component {
     constructor(props) {
@@ -9,12 +11,17 @@ class Post extends Component {
     }
 
     render() {
-
         return (
-            <div className='card'>
-                <div className='container'>
-                    <h4><b>{this.user}</b></h4>
-                    <p>{this.detail}</p>
+            <div>
+                <div className='card'>
+                    <div className='container'>
+                        <h4><b>{this.user}</b></h4>
+                        <p>{this.detail}</p>
+                    </div>
+                </div>
+                <div>
+                    <Comments comments={this.props.comments}/>
+                    <CommentField/>
                 </div>
             </div>
         );

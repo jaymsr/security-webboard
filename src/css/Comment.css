@@ -1,0 +1,13 @@
+.comment {
+    width: 30rem;
+    /* height: 3rem; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding-top: 0.1px;
+    background-color: #f0f0f0;
+}
+
+.comment-container {
+    font-size: 12px;
+    padding: 2px 16px;
+}

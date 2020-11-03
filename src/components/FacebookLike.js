@@ -22,20 +22,26 @@ class FacebookLike extends Component {
     }
 
     render() {
-        const MockPosts = [{ user: 'teemo', detail: 'i love you pam' }, { user: 'pam', detail: 'what about หมิว la' }]
+        const MockPosts = [
+                            { user: 'teemo', detail: 'i love you pam',
+                            comments:[{commentator:'BigToo',comment:'very good'},{commentator:'BigO',comment:'Oh yeah'}] },
+                          ]
         return (
-            <div className="Facebook-Page">
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        <input type="text" value={this.state.value} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Post" />
-                </form>
-
-                <div className='Post'>
-                    {MockPosts.map(function (d, idx) {
-                        return (<Post user={d.user} detail={d.detail} />)
-                    })}
+            <div>
+                <div className="Facebook-Page">
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            <input type="text" value={this.state.value} onChange={this.handleChange} />
+                        </label>
+                        <input type="submit" value="Post" />
+                    </form>
+                </div>
+                <div>
+                    <div className='Post'>
+                        {MockPosts.map(function (d, idx) {
+                            return (<Post user={d.user} detail={d.detail} comments={d.comments}/>)
+                        })}
+                    </div>
                 </div>
             </div>
         );
