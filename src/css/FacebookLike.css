@@ -1,0 +1,13 @@
+.Facebook-Page {
+    margin-top: 2rem;
+    text-align: center;
+    height: 100vh;
+}
+
+.Post {
+    margin-top: 2rem;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import Login from './components/Login'
+import FacebookLike from './components/FacebookLike'
 
 class App extends Component {
   constructor(props) {
@@ -8,11 +9,9 @@ class App extends Component {
     this.state = {
       page: "Login"
     };
-  
+
     this.updateCurrentPage = this.updateCurrentPage.bind(this);
   }
-
-  
 
   updateCurrentPage(status) {
     this.setState({
@@ -26,7 +25,7 @@ class App extends Component {
       <div>
         {this.state.page === "TimeLine" ? (
           <div>
-            <p>TimeLinePage</p>
+            <FacebookLike />
           </div>
         ) : this.state.page === "Login" ? (
           <div>
