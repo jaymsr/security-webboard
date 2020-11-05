@@ -44,7 +44,7 @@ class App extends Component {
             <div className="PageSwitcher"></div>
 
             <div className="FormTitle">
-              <NavLink to="/sign-in" div activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink>
+              <label className="FormTitle_Link">Sign In</label>
             </div>
 
             <Login />

@@ -26,26 +26,20 @@
 }
 
 .FormTitle {
-  color: #707C8B;
+  color: #ffffff;
   font-weight: 300;
   margin-bottom: 50px;
   margin-left: 20px;
 }
 
-.FormTitle__Link {
-  color: #707C8B;
-  text-decoration: none;
+.FormTitle_Link {
+  color: rgb(255, 255, 255);
+  border-bottom: 1px solid #199087;
   display: inline-block;
   font-size: 1.7em;
   margin: 0 10px;
   padding-bottom: 5px;
-  margin-left: 20px;
-}
-
-.FormTitle__Link--Active {
-  color: white;
-  border-bottom: 1px solid #199087;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 /* //////////////////////////////////////////////// */
