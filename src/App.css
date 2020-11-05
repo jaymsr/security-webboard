@@ -1,4 +1,55 @@
 .App {
+  height: 100vh;
+  display: flex;
+  color: white;
+}
+
+.App__Aside {
+  width: 50%;
+  background-image: url(https://cdn1.epicgames.com/ue/product/Screenshot/1-1920x1080-b5d831b9a4ce0963d6a63af8fafe85d2.jpg?resize=1&w=1600);
+  height: 100vh;
+}
+
+.App__Form {
+  width: 50%;
+  background: linear-gradient(rgba(3, 21, 83, 0.856), transparent);
+  background-color: #1a0529;
+  padding: 25px 40px;
+  overflow: auto;
+}
+
+.PageSwitcher {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10%;
+  height: 10vh;
+}
+
+.FormTitle {
+  color: #707C8B;
+  font-weight: 300;
+  margin-bottom: 50px;
+  margin-left: 20px;
+}
+
+.FormTitle__Link {
+  color: #707C8B;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.7em;
+  margin: 0 10px;
+  padding-bottom: 5px;
+  margin-left: 20px;
+}
+
+.FormTitle__Link--Active {
+  color: white;
+  border-bottom: 1px solid #199087;
+  margin-left: 20px;
+}
+
+/* //////////////////////////////////////////////// */
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +86,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
