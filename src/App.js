@@ -1,56 +1,73 @@
 import React, { Component } from 'react'
-import { HashRouter as Router, Route, Link, NavLink } from 'react-router-dom';
+import axios from 'axios';
 import './App.css'
 import Login from './components/Login'
 import FacebookLike from './components/FacebookLike'
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     page: "Login"
-  //   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentUser: {
+        email: null,
+        role: null,
+      },
+      currentBlogs: []
+    };
+    this.updateCurrentUser = this.updateCurrentUser.bind(this);
+  }
 
-  //   this.updateCurrentPage = this.updateCurrentPage.bind(this);
-  // }
+  updateCurrentUser(user) {
+    axios.get("http://localhost:9000/api/users/useremail/" + user)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          currentUser: {
+            email: user,
+            role: res.data.role,
+          },
+        })
+      });
+  }
 
-  // updateCurrentPage(status) {
-  //   this.setState({
-  //     page: status
-  //   });
-  // }
+  getAllBlogs() {
+    axios.get("http://localhost:9000/api/blogs/")
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          currentBlogs: res.data
+        })
+      });
+  }
+
+  componentDidMount() {
+    this.getAllBlogs()
+  }
 
 
   render() {
+    console.log(this.state, 'current state')
     return (
-      // <div>
-      //   {this.state.page === "TimeLine" ? (
-      //     <div>
-      //       <FacebookLike />
-      //     </div>
-      //   ) : this.state.page === "Login" ? (
-      //     <div>
-      //       <Login
-      //         updateCurrentPage={this.updateCurrentPage}
-      //       />
-      //     </div>
-      //   ) : null}
-      // </div>
-
-      <div className="App">
-          <div className="App__Aside"></div>
-          <div className="App__Form">
-
-            <div className="PageSwitcher"></div>
-
-            <div className="FormTitle">
-              <label className="FormTitle_Link">Sign In</label>
-            </div>
-
-            <Login />
-
+      <div>
+        {this.state.currentUser.email ? (
+          <div>
+            <FacebookLike currentBlogs={this.state.currentBlogs} currentUser={this.state.currentUser} />
           </div>
+        ) : !this.state.currentUser.email ? (
+          <div className="App">
+            <div className="App__Aside"></div>
+            <div className="App__Form">
+              <div className="PageSwitcher"></div>
+              <div className="FormTitle">
+                <label className="FormTitle_Link">Sign In</label>
+              </div>
+              <Login updateCurrentUser={this.updateCurrentUser} />
+            </div>
+          </div>
+        ) : null}
       </div>
+
+
     )
   }
 }
@@ -154,7 +171,7 @@ export default App;
 //               setHasAccount={setHasAccount}
 //               emailError={emailError}
 //               passwordError={passwordError}>
-            
+
 //               </Login>
 //           )}
 //         </div>

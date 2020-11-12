@@ -6,8 +6,7 @@ class FacebookLike extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { value: '' };
-
+        this.state = {value: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -22,10 +21,6 @@ class FacebookLike extends Component {
     }
 
     render() {
-        const MockPosts = [
-                            { user: 'teemo', detail: 'i love you pam',
-                            comments:[{commentator:'BigToo',comment:'very good'},{commentator:'BigO',comment:'Oh yeah'}] },
-                          ]
         return (
             <div>
                 <div className="Facebook-Page">
@@ -38,8 +33,9 @@ class FacebookLike extends Component {
                 </div>
                 <div>
                     <div className='Post'>
-                        {MockPosts.map(function (d, idx) {
-                            return (<Post user={d.user} detail={d.detail} comments={d.comments}/>)
+                        {this.props.currentBlogs.map((d, idx) => {
+                            console.log(d._id)
+                            return (<Post id={d._id} blogger={d.blogger} detail={d.BlogDetail} comments={d.comments} currentUser={this.props.currentUser} />)
                         })}
                     </div>
                 </div>

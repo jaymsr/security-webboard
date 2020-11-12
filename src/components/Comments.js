@@ -3,13 +3,18 @@ import Comment from './Comment';
 
 class Comments extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         if (true) {
             return (
                 <div>
                     {
                         this.props.comments.map((commentObj, index) => {
-                            return <Comment commentObj={commentObj}/>
+                            return <Comment commentObj={commentObj} commentator={commentObj.name} 
+                            currentUser={this.props.currentUser} handleDeleteComment={this.props.handleDeleteComment}/>
                         })
                     }
                 </div>

@@ -28,9 +28,6 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
 
-        console.log('The form was submitted with the following data:');
-        console.log(this.state);
-
         const {email, password} = this.state;
 
         fire
@@ -40,8 +37,8 @@ class Login extends Component {
                 this.setState({
                   currentUser: response.user
                 })
+                this.props.updateCurrentUser(response.user.email)
             })
-
             .catch((err) => {
                 switch (err.code){
                     case "auth/invalid-email":
@@ -73,15 +70,15 @@ class Login extends Component {
     render() {
         ////////////////////// change this part to webbord page //////////////////////////
         const {message, currentUser} = this.state;
-        if (currentUser) {
-            return (
-                <div>
-                    <p>Hello {currentUser.email}</p>
-                    <p>CHANGE THIS PART TO WEBBOARD PAGE HAI DUAY JUBJUB</p>
-                    <button className="FormField__Button mr-20" onClick={this.logout}>Logout</button>
-                </div>
-            )
-        }
+        // if (currentUser) {
+        //     return (
+        //         <div>
+        //             <p>Hello {currentUser.email}</p>
+        //             <p>CHANGE THIS PART TO WEBBOARD PAGE HAI DUAY JUBJUB</p>
+        //             <button className="FormField__Button mr-20" onClick={this.logout}>Logout</button>
+        //         </div>
+        //     )
+        // }
         ////////////////////// change this part to webbord page //////////////////////////
 
         return (

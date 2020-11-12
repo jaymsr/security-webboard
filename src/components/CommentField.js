@@ -5,32 +5,19 @@ class CommentField extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          user: []
+            user: []
         }
         this.addComment = this.addComment.bind(this);
-      }
+    }
 
     addComment(e) {
         console.log('submit')
-        // // Prevent the default behaviour of form submit
         e.preventDefault();
-
-        // Get the value of the comment box
-        // and make sure it not some empty strings
         const comment = e.target.elements.comment.value.trim();
-        // const name = this.state.user.firstName + ' ' + this.state.user.lastName
-
-        // Make sure name and comment boxes are filled
-        // if (name && comment) {
-        //     const commentObject = {
-        //         name,
-        //         comment
-        //     };
-
-            // this.props.handleAddComment(commentObject)
-            e.target.elements.comment.value = '';
-            // e.target.elements.name.value = '';
-        // }
+        if (comment) {
+            this.props.handleAddComment(comment)
+        }
+        e.target.elements.comment.value = '';
     }
 
     render() {
