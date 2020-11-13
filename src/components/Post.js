@@ -48,6 +48,7 @@ class Post extends Component {
             })
             .then(function (response) {
                 console.log(response);
+                window.location.reload(false);
             })
             .catch(function (error) {
                 console.log(error);
@@ -62,6 +63,7 @@ class Post extends Component {
         })
             .then(function (response) {
                 console.log(response);
+                window.location.reload(false);
             })
             .catch(function (error) {
                 console.log(error);

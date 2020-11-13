@@ -8,13 +8,13 @@ class Comments extends Component {
     }
 
     render() {
-        if (true) {
+        if (this.props.comments.length) {
             return (
                 <div>
                     {
                         this.props.comments.map((commentObj, index) => {
-                            return <Comment commentObj={commentObj} commentator={commentObj.name} 
-                            currentUser={this.props.currentUser} handleDeleteComment={this.props.handleDeleteComment}/>
+                            return <Comment commentObj={commentObj} commentator={commentObj.name}
+                                currentUser={this.props.currentUser} handleDeleteComment={this.props.handleDeleteComment} />
                         })
                     }
                 </div>
@@ -22,7 +22,11 @@ class Comments extends Component {
         }
         else {
             return (
-                <p>Add the first Comment</p>
+                <div className='comment'>
+                    <div className='comment-container'>
+                        <p>Add a First Comment</p>
+                    </div>
+                </div>
             );
         }
     }
