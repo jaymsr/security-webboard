@@ -91,7 +91,8 @@ class Login extends Component {
                             required
                             placeholder="Enter your username" 
                             name="email"
-                            value={this.state.email} 
+                            value={this.state.email}
+                            autocomplete="off" 
                             onChange={this.handleChange} />
                     </div>
 
@@ -104,6 +105,7 @@ class Login extends Component {
                             placeholder="Enter your password"
                             name="password" 
                             value={this.state.password} 
+                            autocomplete="off"
                             onChange={this.handleChange} />      
                     </div>
 
