@@ -71,11 +71,13 @@ class Post extends Component {
     }
 
     render() {
+        var n = this.blogger.indexOf("@");
+        var blogger = this.blogger.slice(0, n);
         return (
             <div>
                 <div className='card'>
                     <div className='container'>
-                        <h4><b>{this.blogger}</b></h4>
+                        <h4><b>{blogger}</b></h4>
                         <p>{this.detail}</p>
                     </div>
                 </div>

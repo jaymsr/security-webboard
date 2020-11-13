@@ -23,12 +23,13 @@ class Comment extends Component {
                 </button>
             );
         }
-
+        var n = this.props.commentObj.name.indexOf("@");
+        var name = this.props.commentObj.name.slice(0, n);
         return (
             <div className='comment'>
                 <div className='comment-container'>
                     <h4>
-                        <b>{this.props.commentObj.name}</b>
+                        <b>{name}</b>
                         {deleteButton}
                     </h4>
                     <p>{this.props.commentObj.comment}</p>
