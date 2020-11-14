@@ -14,6 +14,8 @@ class Post extends Component {
         this.currentUser = props.currentUser
         this.handleAddComment = this.handleAddComment.bind(this);
         this.handleDeleteComment = this.handleDeleteComment.bind(this);
+        this.handleDeletePost = this.handleDeletePost.bind(this);
+        this.deletePost = this.deletePost.bind(this);
     }
 
     handleAddComment(comment) {
@@ -70,13 +72,43 @@ class Post extends Component {
             });
     }
 
+    handleDeletePost(blog_id) {
+        axios.delete("http://localhost:9000/api/blogs/" + this.props.id, {
+            data: {
+                cid: blog_id,
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                // window.location.reload(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    deletePost() {
+        alert('Deleted');
+        this.handleDeletePost(this.props.id);
+        window.location.reload();
+    }
+
     render() {
+        let deleteButton = ''
+        if (this.props.blogger == this.props.currentUser.email || this.props.currentUser.role == 'moderator') {
+            deleteButton = (
+                <button className='delete-button' style={{ float: 'right', marginTop: '0.5rem' }} onClick={this.deletePost}>
+                    <i class="ico-times" role="img" aria-label="Cancel" />
+                </button>
+            );
+        }
         var n = this.blogger.indexOf("@");
         var blogger = this.blogger.slice(0, n);
         return (
             <div>
                 <div className='card'>
                     <div className='container'>
+                        {deleteButton}
                         <h4><b>{blogger}</b></h4>
                         <p>{this.detail}</p>
                     </div>
