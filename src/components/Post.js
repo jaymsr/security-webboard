@@ -4,6 +4,7 @@ import Comments from './Comments';
 import '../css/Post.css';
 import CommentField from './CommentField';
 import CryptoJS from "crypto-js";
+import EditModal from './EditModal'
 
 class Post extends Component {
     constructor(props) {
@@ -95,11 +96,15 @@ class Post extends Component {
 
     render() {
         let deleteButton = ''
+        let editButton = ''
         if (this.props.blogger == this.props.currentUser.email || this.props.currentUser.role == 'moderator') {
             deleteButton = (
-                <button className='delete-button' style={{ float: 'right', marginTop: '0.5rem' }} onClick={this.deletePost}>
+                <button className='delete-button' style={{ float: 'right', marginTop: '0.5rem', marginLeft: '0.5rem' }} onClick={this.deletePost}>
                     <i class="ico-times" role="img" aria-label="Cancel" />
                 </button>
+            );
+            editButton = (
+                <EditModal detail={this.detail} blogger={this.blogger} id={this.props.id} />
             );
         }
         var n = this.blogger.indexOf("@");
@@ -108,7 +113,10 @@ class Post extends Component {
             <div>
                 <div className='card'>
                     <div className='container'>
-                        {deleteButton}
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                            {editButton}
+                            {deleteButton}
+                        </div>
                         <h4><b>{blogger}</b></h4>
                         <p>{this.detail}</p>
                     </div>
