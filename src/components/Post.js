@@ -15,13 +15,8 @@ class Post extends Component {
         this.currentUser = props.currentUser
         this.handleAddComment = this.handleAddComment.bind(this);
         this.handleDeleteComment = this.handleDeleteComment.bind(this);
-<<<<<<< HEAD
-        this.handleEditComment = this.handleEditComment.bind(this);
-||||||| merged common ancestors
-=======
         this.handleDeletePost = this.handleDeletePost.bind(this);
         this.deletePost = this.deletePost.bind(this);
->>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
     }
 
     handleAddComment(comment) {
@@ -78,7 +73,6 @@ class Post extends Component {
             });
     }
 
-<<<<<<< HEAD
     handleEditComment(comment_id,comment) {
         console.log(comment_id,comment,' handle Edit')
         axios.put("http://localhost:9000/api/blogs/" + this.id + "/comment",
@@ -96,8 +90,6 @@ class Post extends Component {
     }
 
 
-||||||| merged common ancestors
-=======
     handleDeletePost(blog_id) {
         axios.delete("http://localhost:9000/api/blogs/" + this.props.id, {
             data: {
@@ -119,7 +111,6 @@ class Post extends Component {
         window.location.reload();
     }
 
->>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
     render() {
         let deleteButton = ''
         let editButton = ''
