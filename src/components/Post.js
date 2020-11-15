@@ -4,6 +4,7 @@ import Comments from './Comments';
 import '../css/Post.css';
 import CommentField from './CommentField';
 import CryptoJS from "crypto-js";
+import EditModal from './EditModal'
 
 class Post extends Component {
     constructor(props) {
@@ -14,7 +15,13 @@ class Post extends Component {
         this.currentUser = props.currentUser
         this.handleAddComment = this.handleAddComment.bind(this);
         this.handleDeleteComment = this.handleDeleteComment.bind(this);
+<<<<<<< HEAD
         this.handleEditComment = this.handleEditComment.bind(this);
+||||||| merged common ancestors
+=======
+        this.handleDeletePost = this.handleDeletePost.bind(this);
+        this.deletePost = this.deletePost.bind(this);
+>>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
     }
 
     handleAddComment(comment) {
@@ -71,6 +78,7 @@ class Post extends Component {
             });
     }
 
+<<<<<<< HEAD
     handleEditComment(comment_id,comment) {
         console.log(comment_id,comment,' handle Edit')
         axios.put("http://localhost:9000/api/blogs/" + this.id + "/comment",
@@ -88,13 +96,53 @@ class Post extends Component {
     }
 
 
+||||||| merged common ancestors
+=======
+    handleDeletePost(blog_id) {
+        axios.delete("http://localhost:9000/api/blogs/" + this.props.id, {
+            data: {
+                cid: blog_id,
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                // window.location.reload(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    deletePost() {
+        alert('Deleted');
+        this.handleDeletePost(this.props.id);
+        window.location.reload();
+    }
+
+>>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
     render() {
+        let deleteButton = ''
+        let editButton = ''
+        if (this.props.blogger == this.props.currentUser.email || this.props.currentUser.role == 'moderator') {
+            deleteButton = (
+                <button className='delete-button' style={{ float: 'right', marginTop: '0.5rem', marginLeft: '0.5rem' }} onClick={this.deletePost}>
+                    <i class="ico-times" role="img" aria-label="Cancel" />
+                </button>
+            );
+            editButton = (
+                <EditModal detail={this.detail} blogger={this.blogger} id={this.props.id} />
+            );
+        }
         var n = this.blogger.indexOf("@");
         var blogger = this.blogger.slice(0, n);
         return (
             <div>
                 <div className='card'>
                     <div className='container'>
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                            {editButton}
+                            {deleteButton}
+                        </div>
                         <h4><b>{blogger}</b></h4>
                         <p>{this.detail}</p>
                     </div>
