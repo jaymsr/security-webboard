@@ -34,7 +34,6 @@ class FacebookLike extends Component {
                 <div>
                     <div className='Post'>
                         {this.props.currentBlogs.map((d, idx) => {
-                            console.log(d._id)
                             return (<Post id={d._id} blogger={d.blogger} detail={d.BlogDetail} comments={d.comments} currentUser={this.props.currentUser} />)
                         })}
                     </div>

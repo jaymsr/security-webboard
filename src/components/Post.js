@@ -14,6 +14,7 @@ class Post extends Component {
         this.currentUser = props.currentUser
         this.handleAddComment = this.handleAddComment.bind(this);
         this.handleDeleteComment = this.handleDeleteComment.bind(this);
+        this.handleEditComment = this.handleEditComment.bind(this);
     }
 
     handleAddComment(comment) {
@@ -47,7 +48,6 @@ class Post extends Component {
                 comment: comment
             })
             .then(function (response) {
-                console.log(response);
                 window.location.reload(false);
             })
             .catch(function (error) {
@@ -56,8 +56,9 @@ class Post extends Component {
     }
 
     handleDeleteComment(comment_id) {
-        axios.delete("http://localhost:9000/api/blogs/" + this.id + "/comment", {
-            data: {
+        axios.delete("http://localhost:9000/api/blogs/" + this.id + "/comment", 
+            {
+            data:{
                 cid: comment_id,
             }
         })
@@ -69,6 +70,23 @@ class Post extends Component {
                 console.log(error);
             });
     }
+
+    handleEditComment(comment_id,comment) {
+        console.log(comment_id,comment,' handle Edit')
+        axios.put("http://localhost:9000/api/blogs/" + this.id + "/comment",
+            {
+                cid: comment_id,
+                msg: comment
+            })
+            .then(function (response) {
+                console.log(response);
+                window.location.reload(false);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
 
     render() {
         var n = this.blogger.indexOf("@");
@@ -82,7 +100,9 @@ class Post extends Component {
                     </div>
                 </div>
                 <div>
-                    <Comments currentUser={this.props.currentUser} comments={this.props.comments} handleDeleteComment={this.handleDeleteComment} />
+                    <Comments currentUser={this.props.currentUser} comments={this.props.comments}
+                     handleDeleteComment={this.handleDeleteComment}
+                     handleEditComment={this.handleEditComment}  />
                     <CommentField currentUser={this.props.currentUser} handleAddComment={this.handleAddComment} />
                 </div>
             </div>

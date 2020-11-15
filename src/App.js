@@ -21,7 +21,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllBlogs()
-    console.log('comp did')
     fire.auth().onAuthStateChanged(user => {
       this.updateCurrentUser(user)
     })
@@ -40,7 +39,6 @@ class App extends Component {
       var email = user.email
       axios.get("http://localhost:9000/api/users/useremail/" + email)
         .then(res => {
-          console.log(res.data, ' set state');
           this.setState({
             currentUser: {
               email: email,
@@ -54,7 +52,6 @@ class App extends Component {
   getAllBlogs() {
     axios.get("http://localhost:9000/api/blogs/")
       .then(res => {
-        console.log(res.data)
         this.setState({
           currentBlogs: res.data
         })
@@ -63,7 +60,7 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state, 'current state')
+    // console.log(this.state, 'current state')
     if (this.state.currentUser.email === '') {
       return (
         null
