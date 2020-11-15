@@ -5,6 +5,8 @@ class EditField extends Component {
     constructor(props) {
         super(props);
         this.submitEditComment = this.submitEditComment.bind(this);
+        this.cancel = this.cancel.bind(this);
+
     }
 
     submitEditComment(e) {
@@ -18,7 +20,7 @@ class EditField extends Component {
     }
 
     cancel() {
-        // this.props.cancelEditComment()
+        this.props.cancelEditComment()
     }
 
     render() {
@@ -33,6 +35,7 @@ class EditField extends Component {
                                     className="textarea"
                                     name="comment"
                                     placeholder={this.props.oldComment} >
+                                    {this.props.oldComment}
                                 </textarea>
                             </div>
                         </div>

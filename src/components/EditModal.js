@@ -57,8 +57,8 @@ function EditModal(props) {
 
     return (
         <div>
-            <button className='edit-button' onClick={openModal} style={{ float: 'right', marginTop: '0.5rem' }}>
-                <i class="ico-times" role="img" aria-label="Edit" />
+            <button  onClick={openModal} style={{ float: 'right', marginTop: '0.5rem' }}>
+                Edit
             </button>
             <Modal
                 isOpen={modalIsOpen}

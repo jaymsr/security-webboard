@@ -12,6 +12,7 @@ class Comment extends Component {
         }
         this.deleteComment = this.deleteComment.bind(this);
         this.editComment = this.editComment.bind(this);
+        this.cancelEditComment = this.cancelEditComment.bind(this);
     }
 
     deleteComment() {
@@ -73,7 +74,7 @@ class Comment extends Component {
         else {
             return (
                 <div className='comment'>
-                    <EditField editComment={this.cancelEditComment}
+                    <EditField cancelEditComment={this.cancelEditComment}
                      oldComment={this.props.commentObj.comment}
                      commentId = {this.props.commentObj.cid}
                      handleEditComment={this.props.handleEditComment} />

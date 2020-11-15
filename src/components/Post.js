@@ -115,9 +115,10 @@ class Post extends Component {
     render() {
         let deleteButton = ''
         let editButton = ''
+
         if (this.props.blogger == this.props.currentUser.email || this.props.currentUser.role == 'moderator') {
             deleteButton = (
-                <button className='delete-button' style={{ float: 'right', marginTop: '0.5rem', marginLeft: '0.5rem' }} onClick={this.deletePost}>
+                <button style={{ float: 'right', marginTop: '0.5rem'}} onClick={this.deletePost}>
                     <i class="ico-times" role="img" aria-label="Cancel" />
                 </button>
             );
