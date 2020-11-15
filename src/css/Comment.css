@@ -12,16 +12,8 @@
 }
 
 .comment-container {
-<<<<<<< HEAD
     font-size: 14px;
     padding: 2px 16px;
-||||||| merged common ancestors
-    font-size: 12px;
-    padding: 2px 16px;
-=======
-  font-size: 12px;
-  padding: 2px 16px;
->>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
 }
 
 .delete-button {

@@ -15,6 +15,7 @@ class Post extends Component {
         this.currentUser = props.currentUser
         this.handleAddComment = this.handleAddComment.bind(this);
         this.handleDeleteComment = this.handleDeleteComment.bind(this);
+        this.handleEditComment = this.handleEditComment.bind(this);
         this.handleDeletePost = this.handleDeletePost.bind(this);
         this.deletePost = this.deletePost.bind(this);
     }
@@ -74,7 +75,7 @@ class Post extends Component {
     }
 
     handleEditComment(comment_id,comment) {
-        console.log(comment_id,comment,' handle Edit')
+        console.log(comment_id,comment,this.id,' handle Edit')
         axios.put("http://localhost:9000/api/blogs/" + this.id + "/comment",
             {
                 cid: comment_id,

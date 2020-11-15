@@ -14,6 +14,7 @@ class FacebookLike extends Component {
     }
 
     handleAddPost(post) {
+        console.log(this.props.currentUser.email,post)
 
         axios.post("http://localhost:9000/api/blogs/",
             {
@@ -22,7 +23,7 @@ class FacebookLike extends Component {
             })
             .then(function (response) {
                 console.log(response);
-                window.location.reload();
+                // window.location.reload();
             })
             .catch(function (error) {
                 console.log(error);
@@ -37,7 +38,7 @@ class FacebookLike extends Component {
         alert('Posted');
         event.preventDefault();
         this.handleAddPost(this.state.value)
-        window.location.reload();
+        // window.location.reload();
     }
 
     render() {
@@ -54,12 +55,7 @@ class FacebookLike extends Component {
                 <div>
                     <div className='Post'>
                         {this.props.currentBlogs.map((d, idx) => {
-<<<<<<< HEAD
-||||||| merged common ancestors
-                            console.log(d._id)
-=======
                             // console.log(d._id)
->>>>>>> 29bcbf6f603a6704e0b0da83c3432f833065bb54
                             return (<Post id={d._id} blogger={d.blogger} detail={d.BlogDetail} comments={d.comments} currentUser={this.props.currentUser} />)
                         })}
                     </div>
