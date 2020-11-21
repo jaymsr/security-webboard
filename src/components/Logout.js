@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import fire from "../firebase/config";
+import fire from "../Util/Firebase";
 
 class Logout extends Component {
 
@@ -10,6 +10,7 @@ class Logout extends Component {
     logout = e => {
         e.preventDefault()
         fire.auth().signOut().then(response => {
+            localStorage.clear();
             this.setState({
                 currentUser: null
             })

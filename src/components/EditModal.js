@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import axios from 'axios';
+import {sendRequest} from '../Util/GeneralUtils';
 
 const customStyles = {
     content: {
@@ -18,7 +17,6 @@ const customStyles = {
 // Modal.setAppElement('#yourAppElement')
 
 function EditModal(props) {
-    var subtitle;
     const [modalIsOpen, setIsOpen] = React.useState(false);
     const [detail, setDetail] = React.useState(props.detail);
     function openModal() {
@@ -39,20 +37,19 @@ function EditModal(props) {
     }
 
     function handleEdit() {
-        axios.put("http://localhost:9000/api/blogs/" + props.id,
-            {
-                data: {
-                    id: props.id,
-                    body: detail
-                }
-            })
-            .then(function (response) {
-                console.log(response);
-                window.location.reload();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        let data = {
+            id: props.id,
+            BlogDetail: detail
+        };
+
+        console.log(data)
+
+        sendRequest("http://localhost:9000/api/blogs/" + props.id, 'put', data).then(function(response) {
+            console.log(response)
+            // window.location.reload();
+        }).catch(function (error) {
+            console.log(error);
+        });       
     }
 
     return (

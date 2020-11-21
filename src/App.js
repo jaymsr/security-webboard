@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-import fire from "./firebase/config";
+import fire from "./Util/Firebase";
 import './App.css'
 import Login from './components/Login'
 import Logout from './components/Logout'
 import FacebookLike from './components/FacebookLike'
+import {sendRequest} from './Util/GeneralUtils';
 
 class App extends Component {
   constructor(props) {
     super(props);
+    // axios.defaults.headers.post['X-CSRF-Token']  =  process.env.CSRF;
+    axios.defaults.withCredentials = true;
     this.state = {
       currentUser: {
         email: '',
@@ -17,12 +20,15 @@ class App extends Component {
       currentBlogs: []
     };
     this.updateCurrentUser = this.updateCurrentUser.bind(this);
+    this.getAllBlogs = this.getAllBlogs.bind(this);
   }
 
   componentDidMount() {
-    this.getAllBlogs()
     fire.auth().onAuthStateChanged(user => {
-      this.updateCurrentUser(user)
+      this.updateCurrentUser(user);
+      if (user){
+        this.getAllBlogs();
+      }
     })
   }
 
@@ -37,25 +43,36 @@ class App extends Component {
     }
     else {
       var email = user.email
-      axios.get("http://localhost:9000/api/users/useremail/" + email)
-        .then(res => {
-          this.setState({
-            currentUser: {
-              email: email,
-              role: res.data.role,
-            },
-          })
-        });
+      let data = undefined;
+
+      let self = this;
+
+      sendRequest("http://localhost:9000/api/users/useremail/" + email, 'get', data).then(function(response) {
+        self.setState({
+          currentUser: {
+            email: email,
+            role: response.data.role,
+          },
+        })
+      }).catch(function (error) {
+          console.log(error);
+      });
+      
     }
   }
 
   getAllBlogs() {
-    axios.get("http://localhost:9000/api/blogs/")
-      .then(res => {
-        this.setState({
-          currentBlogs: res.data
-        })
-      });
+
+    let data = undefined;
+    let self = this;
+
+    sendRequest("http://localhost:9000/api/blogs/", 'get', data).then(function(response) {
+      self.setState({
+        currentBlogs: response.data
+      })
+    }).catch(function (error) {
+        console.log(error);
+    });
   }
 
 

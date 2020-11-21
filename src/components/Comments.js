@@ -13,7 +13,7 @@ class Comments extends Component {
                 <div>
                     {
                         this.props.comments.map((commentObj, index) => {
-                            return <Comment commentObj={commentObj} commentator={commentObj.name}
+                            return <Comment key={index} commentObj={commentObj} commentator={commentObj.name}
                                 currentUser={this.props.currentUser}
                                 handleDeleteComment={this.props.handleDeleteComment}
                                 handleEditComment={this.props.handleEditComment}/>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Post from './Post'
-import axios from 'axios';
 import '../css/FacebookLike.css';
+import {sendRequest} from '../Util/GeneralUtils';
+
 
 class FacebookLike extends Component {
 
@@ -14,20 +15,16 @@ class FacebookLike extends Component {
     }
 
     handleAddPost(post) {
-        console.log(this.props.currentUser.email,post)
-
-        axios.post("http://localhost:9000/api/blogs/",
-            {
-                blogger: this.props.currentUser.email,
-                BlogDetail: post
-            })
-            .then(function (response) {
-                console.log(response);
-                // window.location.reload();
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        let data = {
+            blogger: this.props.currentUser.email,
+            BlogDetail: post
+        };
+        
+        sendRequest("http://localhost:9000/api/blogs/", 'post', data).then(function(response) {
+            window.location.reload(); 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     handleChange(event) {
@@ -56,7 +53,7 @@ class FacebookLike extends Component {
                     <div className='Post'>
                         {this.props.currentBlogs.map((d, idx) => {
                             // console.log(d._id)
-                            return (<Post id={d._id} blogger={d.blogger} detail={d.BlogDetail} comments={d.comments} currentUser={this.props.currentUser} />)
+                            return (<Post key={d._id} id={d._id} blogger={d.blogger} detail={d.BlogDetail} comments={d.comments} currentUser={this.props.currentUser} />)
                         })}
                     </div>
                 </div>

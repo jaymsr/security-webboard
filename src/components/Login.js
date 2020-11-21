@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import fire from "../firebase/config";
+import fire from "../Util/Firebase";
 import "../css/Login.css";
+import {sendRequest, decrypt} from '../Util/GeneralUtils';
 
 class Login extends Component {
     constructor(props) {
@@ -15,6 +16,23 @@ class Login extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+    }
+
+    handleLogin(email, idToken, csrfToken) {
+        let data = {
+                        email: email,
+                        idToken: idToken,
+                        csrfToken: csrfToken
+                    };
+        
+        sendRequest("http://localhost:9000/api/users/login", 'post', data).then(function(response) {
+            let token = decrypt(response.data.token);
+            localStorage.setItem('token', token);
+            window.location.reload();
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
     handleChange(e) {
@@ -34,10 +52,13 @@ class Login extends Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .then(response => {
-                this.setState({
-                  currentUser: response.user
-                })
-                this.props.updateCurrentUser(response.user)
+                response.user.getIdToken().then(idToken => {
+                    this.handleLogin(response.user.email, idToken, process.env.REACT_APP_CSRF);
+                    this.setState({
+                        currentUser: response.user
+                    });
+                    this.props.updateCurrentUser(response.user);
+                });
             })
             .catch((err) => {
                 switch (err.code){

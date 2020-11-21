@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import Comments from './Comments';
 import '../css/Post.css';
 import CommentField from './CommentField';
-import CryptoJS from "crypto-js";
 import EditModal from './EditModal'
+import {sendRequest} from '../Util/GeneralUtils';
 
 class Post extends Component {
     constructor(props) {
@@ -21,95 +20,61 @@ class Post extends Component {
     }
 
     handleAddComment(comment) {
-        // let self = this;
-        // console.log(this.props.id,this.currentUser,comment, ' handle comment')
-        // const commentObj = {
-        //         name: this.currentUser.email,
-        //         comment: comment
-        //     }
-        // let ciphertext = CryptoJS.AES.encrypt(JSON.stringify(commentObj), '123456').toString();
-        // let sending_data = {data: ciphertext};
-        // fetch("http://localhost:9000/api/blogs/" + this.props.id + "/comments", {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(sending_data)
-        // }).then(function (response) {
-        //     if (response.status >= 400) {
-        //         throw new Error("Bad response from server");
-        //     }
-        //     return response.json();
-        // }).then(function (resData) {
-        //     window.location.reload()
 
-        // }).catch(function (err) {
-        //     console.log(err);
-        // });
-
-        axios.post("http://localhost:9000/api/blogs/" + this.id + "/comments",
-            {
-                name: this.currentUser.email,
-                comment: comment
-            })
-            .then(function (response) {
-                window.location.reload(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        let data = {
+            name: this.currentUser.email,
+            comment: comment
+        };
+        
+        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comments", 'post', data).then(function(response) {
+            window.location.reload(); 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
+
     handleDeleteComment(comment_id) {
-        axios.delete("http://localhost:9000/api/blogs/" + this.id + "/comment", 
-            {
-            data:{
-                cid: comment_id,
-            }
-        })
-            .then(function (response) {
-                console.log(response);
-                window.location.reload(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+
+        let data = {cid: comment_id};
+
+        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comment", 'delete', data).then(function(response) {
+            window.location.reload(); 
+        }).catch(function (error) {
+            console.log(error);
+        });
+        
     }
 
     handleEditComment(comment_id,comment) {
-        console.log(comment_id,comment,this.id,' handle Edit')
-        axios.put("http://localhost:9000/api/blogs/" + this.id + "/comment",
-            {
-                cid: comment_id,
-                msg: comment
-            })
-            .then(function (response) {
-                console.log(response);
-                window.location.reload(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        let data = {
+            cid: comment_id,
+            msg: comment
+        };
+
+        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comment", 'put', data).then(function(response) {
+            window.location.reload(); 
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
 
-    handleDeletePost(blog_id) {
-        axios.delete("http://localhost:9000/api/blogs/" + this.props.id, {
-            data: {
-                cid: blog_id,
-            }
-        })
-            .then(function (response) {
-                console.log(response);
-                // window.location.reload(false);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    handleDeletePost() {
+
+        let data = undefined;
+
+        sendRequest("http://localhost:9000/api/blogs/" + this.id, 'delete', data).then(function(response) {
+            window.location.reload(); 
+        }).catch(function (error) {
+            console.log(error);
+        });
+
     }
 
     deletePost() {
         alert('Deleted');
-        this.handleDeletePost(this.props.id);
-        window.location.reload();
+        this.handleDeletePost();
     }
 
     render() {
