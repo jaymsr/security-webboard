@@ -26,7 +26,7 @@ class Post extends Component {
             comment: comment
         };
         
-        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comments", 'post', data).then(function(response) {
+        sendRequest("/blogs/" + this.id + "/comments", 'post', data).then(function(response) {
             window.location.reload(); 
         }).catch(function (error) {
             console.log(error);
@@ -38,7 +38,7 @@ class Post extends Component {
 
         let data = {cid: comment_id};
 
-        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comment", 'delete', data).then(function(response) {
+        sendRequest("/blogs/" + this.id + "/comment", 'delete', data).then(function(response) {
             window.location.reload(); 
         }).catch(function (error) {
             console.log(error);
@@ -52,7 +52,7 @@ class Post extends Component {
             msg: comment
         };
 
-        sendRequest("http://localhost:9000/api/blogs/" + this.id + "/comment", 'put', data).then(function(response) {
+        sendRequest("/blogs/" + this.id + "/comment", 'put', data).then(function(response) {
             window.location.reload(); 
         }).catch(function (error) {
             console.log(error);
@@ -64,7 +64,7 @@ class Post extends Component {
 
         let data = undefined;
 
-        sendRequest("http://localhost:9000/api/blogs/" + this.id, 'delete', data).then(function(response) {
+        sendRequest("/blogs/" + this.id, 'delete', data).then(function(response) {
             window.location.reload(); 
         }).catch(function (error) {
             console.log(error);

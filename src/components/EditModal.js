@@ -44,9 +44,8 @@ function EditModal(props) {
 
         console.log(data)
 
-        sendRequest("http://localhost:9000/api/blogs/" + props.id, 'put', data).then(function(response) {
-            console.log(response)
-            // window.location.reload();
+        sendRequest("/blogs/" + props.id, 'put', data).then(function(response) {
+            window.location.reload();
         }).catch(function (error) {
             console.log(error);
         });       

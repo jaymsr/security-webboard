@@ -20,7 +20,7 @@ class FacebookLike extends Component {
             BlogDetail: post
         };
         
-        sendRequest("http://localhost:9000/api/blogs/", 'post', data).then(function(response) {
+        sendRequest("/blogs/", 'post', data).then(function(response) {
             window.location.reload(); 
         }).catch(function (error) {
             console.log(error);

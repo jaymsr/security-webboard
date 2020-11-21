@@ -26,7 +26,7 @@ class Login extends Component {
                         csrfToken: csrfToken
                     };
         
-        sendRequest("http://localhost:9000/api/users/login", 'post', data).then(function(response) {
+        sendRequest("/users/login", 'post', data).then(function(response) {
             let token = decrypt(response.data.token);
             localStorage.setItem('token', token);
             window.location.reload();

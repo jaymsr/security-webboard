@@ -6,7 +6,7 @@ function sendRequest(url, method, data){
 
     return axios({
         method: method,
-        url: url,
+        url: `http://${process.env.REACT_APP_BACKEND}:${process.env.REACT_APP_BACKEND_PORT}/api${url}`,
         data: data? {data: sendingData}: '',
         headers: {'Authorization': localStorage.getItem('token')},
     })
