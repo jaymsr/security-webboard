@@ -47,7 +47,7 @@ class App extends Component {
 
       let self = this;
 
-      sendRequest("http://localhost:9000/api/users/useremail/" + email, 'get', data).then(function(response) {
+      sendRequest("/users/useremail/" + email, 'get', data).then(function(response) {
         self.setState({
           currentUser: {
             email: email,
@@ -66,7 +66,7 @@ class App extends Component {
     let data = undefined;
     let self = this;
 
-    sendRequest("http://localhost:9000/api/blogs/", 'get', data).then(function(response) {
+    sendRequest("/blogs/", 'get', data).then(function(response) {
       self.setState({
         currentBlogs: response.data
       })
